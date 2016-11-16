@@ -1,4 +1,4 @@
-package JsonParse;
+package JsonParse.Prizes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public class Prize {
     private String year;
     private String category;
-    private List<Laureate> laureates = new ArrayList<Laureate>();
+    private List<PrizeLaureate> prizeLaureates = new ArrayList<PrizeLaureate>();
 
     public Prize() {}
 
@@ -29,12 +29,12 @@ public class Prize {
         this.category = category;
     }
 
-    public List<Laureate> getLaureates() {
-        return laureates;
+    public List<PrizeLaureate> getPrizeLaureates() {
+        return prizeLaureates;
     }
 
-    public void setLaureates(List<Laureate> laureates) {
-        this.laureates = laureates;
+    public void setPrizeLaureates(List<PrizeLaureate> prizeLaureates) {
+        this.prizeLaureates = prizeLaureates;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Prize {
         if (getYear() != null ? !getYear().equals(prize.getYear()) : prize.getYear() != null) return false;
         if (getCategory() != null ? !getCategory().equals(prize.getCategory()) : prize.getCategory() != null)
             return false;
-        return getLaureates() != null ? getLaureates().equals(prize.getLaureates()) : prize.getLaureates() == null;
+        return getPrizeLaureates() != null ? getPrizeLaureates().equals(prize.getPrizeLaureates()) : prize.getPrizeLaureates() == null;
 
     }
 
@@ -55,16 +55,16 @@ public class Prize {
     public int hashCode() {
         int result = getYear() != null ? getYear().hashCode() : 0;
         result = 31 * result + (getCategory() != null ? getCategory().hashCode() : 0);
-        result = 31 * result + (getLaureates() != null ? getLaureates().hashCode() : 0);
+        result = 31 * result + (getPrizeLaureates() != null ? getPrizeLaureates().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Prize{" +
+        return "LaureatePrize{" +
                 "year='" + year + '\'' +
                 "\n category='" + category + '\'' +
-                "\n laureates=" + laureates +
+                "\n prizeLaureates=" + prizeLaureates +
                 "}\n";
     }
 }
