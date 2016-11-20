@@ -1,20 +1,30 @@
 package JavaFX;
 
+import JsonParse.Countries.CountriesMain;
+import JsonParse.Laureates.LaureatesMain;
 import JsonParse.Prizes.PrizeLaureate;
+import JsonParse.Prizes.PrizesMain;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 public class InterfaceController {
 
     @FXML
-    private TableView<PrizeLaureate> laureateTable;
+    private TabPane mainWindows;
     @FXML
-    private TableColumn<PrizeLaureate, String> firstName;
+    private TableView<PrizesMain> prizeTable;
     @FXML
-    private TableColumn<PrizeLaureate, String> lastName;
+    private TableColumn<PrizesMain, String> names;
+    @FXML
+    private TableColumn<PrizesMain, String> prizeInfo;
+    @FXML
+    private TableView<LaureatesMain> laureateTable;
+    @FXML
+    private  TableColumn<LaureatesMain, String> laureateNames;
+    @FXML
+    private TableColumn<LaureatesMain, String> laureateInfo;
+    @FXML
+    private TableView<CountriesMain> countryTable;
     @FXML
     private ComboBox<String> catergoryBox;
     @FXML
@@ -26,6 +36,15 @@ public class InterfaceController {
     @FXML
     private ComboBox<String> countryBox;
     @FXML
+    private ComboBox<String> countryBox2;
+    @FXML
+    private ComboBox<String> countryCodeBox;
+    @FXML
+    private ComboBox<String> countryCodeBox2;
+    @FXML
+    private ComboBox<String> genderBox;
+
+/*    @FXML
     private Label firstNameLabel;
     @FXML
     private Label lastNameLabel;
@@ -36,7 +55,7 @@ public class InterfaceController {
     @FXML
     private Label idLabel;
     @FXML
-    private Label motivationLabel;
+    private Label motivationLabel;*/
 
 
     private JavaFxMain javaFxMain;
@@ -56,18 +75,17 @@ public class InterfaceController {
         yearfromBox.setItems(javaFxMain.getYears());
         yeartoBox.setItems(javaFxMain.getYears());
         numlaureatesBox.setItems(javaFxMain.getNumLaureates());
-        countryBox.setItems(javaFxMain.getCountries());
+        countryBox.setItems(javaFxMain.getCountryNames());
+        countryBox2.setItems(javaFxMain.getCountryNames());
+        countryCodeBox.setItems(javaFxMain.getCountriesCode());
+        countryCodeBox2.setItems(javaFxMain.getCountriesCode());
+        catergoryBox.setItems(javaFxMain.getCatergories());
+    }
+
+    public void laureateDetails(PrizeLaureate prizeLaureate) {
 
     }
 
-    public void laureateDetails(PrizeLaureate prizeLaureate){
-        if (prizeLaureate != null){
-            firstNameLabel.setText(prizeLaureate.getFirstname());
-            lastNameLabel.setText(prizeLaureate.getSurname());
-            motivationLabel.setText(prizeLaureate.getMotivation());
-        } else {
-
-        }
-    }
+    //public void
 
 }

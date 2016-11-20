@@ -16,6 +16,7 @@ public class JavaMain {
 
         String jsonString = null;
         ConcurrentStuff behindScene = new ConcurrentStuff();
+
         if(urlType.contentEquals("prize")){
             behindScene.setUrlName(prizeUrl);
         } else {
