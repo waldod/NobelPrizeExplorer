@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -20,12 +21,12 @@ import java.util.Map;
 
 public class JavaFxMain extends Application {
     private Stage primaryStage;
-    private BorderPane rootLayout;
+    private AnchorPane rootLayout;
     private CountriesMain allCountries;
 
     @Override
-    public void start(Stage primaryStage){
-        //Parent root = FXMLLoader.load(getClass().getResource("NoblePrizeInterface.fxml"));
+    public void start(Stage primaryStage) {
+        //Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Nobel LaureatePrize Explorer");
         JavaMain javaCode = new JavaMain();
@@ -33,23 +34,26 @@ public class JavaFxMain extends Application {
         String urlType = null;
         String test = null;
 
-        getCountries();
+        //allCountries = javaCode.getAllCountries();
 
         urlType = "country";
         queryInfo.put("category", "physics");
 
         //javaCode.queryAPI(urlType, queryInfo);
         javaCode.parseJsonObject(urlType, test);
-        System.out.println(test);
-        
 
-        startRootLayout();
 
+        //Shutdown
         showInterface();
+
+
+        //startRootLayout();
+
+        //showInterface();
     }
 
     public void startRootLayout(){
-        try {
+/*        try {
             //Load Root
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("RootLayout.fxml"));
@@ -61,22 +65,24 @@ public class JavaFxMain extends Application {
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void showInterface(){
         try {
             //Load Interface
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("NobelPrizeInterface.fxml"));
-            AnchorPane uInterface = (AnchorPane) loader.load();
+            loader.setLocation((getClass().getResource("Interface.fxml")));
+            rootLayout = (AnchorPane) loader.load();
 
-            //Set interface into center of root
-            rootLayout.setCenter(uInterface);
+            //Show Interface
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
 
-            //Controller
             InterfaceController controller = loader.getController();
             controller.setJavaFxMain(this);
+
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -84,10 +90,15 @@ public class JavaFxMain extends Application {
 
     private ObservableList<Integer> years = FXCollections.observableArrayList();
     private ObservableList<Integer> numLaureates = FXCollections.observableArrayList();
-    private ObservableList<String> countries = FXCollections.observableArrayList();
+    private ObservableList<String> countriesName = FXCollections.observableArrayList();
+    private ObservableList<String> countriesCode = FXCollections.observableArrayList();
+    private ObservableList<String> categories = FXCollections.observableArrayList();
+    private ObservableList<String> gender = FXCollections.observableArrayList();
 
     public JavaFxMain(){
         setCountriesList();
+        setCategories();
+        System.out.println("Testing");
         for(int i = 1901; i < 2016; i++){
             years.add(i);
         }
@@ -107,17 +118,35 @@ public class JavaFxMain extends Application {
     private void setCountriesList(){
         JavaMain getinfo = new JavaMain();
         allCountries = getinfo.getAllCountries();
-        List<Country> countryList = new ArrayList<>();
+        List<Country> countryList;
         countryList = allCountries.getCountries();
         for(int i = 0; i < allCountries.getCountries().size(); i++){
             String countryName = countryList.get(i).getName();
-            countries.add(countryName);
+            String countryCode = countryList.get(i).getCode();
+            countriesName.add(countryName);
+            countriesCode.add(countryCode);
         }
     }
-
-    public ObservableList<String> getCountries(){
-        return countries;
+    private void setCategories(){
+        categories.add("Physics");
+        categories.add("Chemistry");
+        categories.add("Medicine");
+        categories.add("Literature");
+        categories.add("Peace");
+        categories.add("Economic sciences");
     }
+
+    private void setGender(){
+        gender.add("Male");
+        gender.add("Female");
+        gender.add("Both");
+    }
+
+    public ObservableList<String> getCountryNames(){
+        return countriesName;
+    }
+    public ObservableList<String> getCountriesCode() { return countriesCode; }
+    public ObservableList<String> getCatergories() {return  categories; }
 
     public Stage getPrimaryStage(){
         return primaryStage;

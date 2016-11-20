@@ -17,7 +17,7 @@ import java.util.concurrent.Future;
 
 //http://stackoverflow.com/questions/9148899/returning-value-from-thread
 public class ConcurrentStuff {
-    private ExecutorService pool = Executors.newFixedThreadPool(4);
+    private ExecutorService pool = Executors.newCachedThreadPool();
     private HttpResponse<JsonNode> jsonResponse = null;
     private String urlName;
     private Map<String, Object> urlQuery = null;
